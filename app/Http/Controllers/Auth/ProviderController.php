@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
+
+
+
+
 class ProviderController extends Controller
 {
     //
@@ -44,9 +48,9 @@ class ProviderController extends Controller
 
             
 
-        
+            $generated_password = Str::random(length:12);
             if(!$user){
-                $generated_password = Str::random(length:12);
+                
                 $user = User::create([
                     'name' => $SocialUser->getName(),
                     'email' => $SocialUser->getEmail(),
