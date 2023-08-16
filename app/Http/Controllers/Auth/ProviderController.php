@@ -63,11 +63,14 @@ class ProviderController extends Controller
                     
                 ]);
 
-                $user->sendEmailVerificationNotification();
+              
 
-               // $user->update([
-                //'password' => Hash::make($generated_password)
-                //]);
+                $user->sendEmailVerificationNotification();
+              
+
+                $user->update([
+                'password' => Hash::make($generated_password)
+                ]);
             }
             Auth::login($user);
             return redirect('/dashboard');    
