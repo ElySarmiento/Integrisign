@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Signature;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -63,7 +64,7 @@ class ProviderController extends Controller
                     
                 ]);
 
-              
+                
 
                 $user->sendEmailVerificationNotification();
               
@@ -73,6 +74,17 @@ class ProviderController extends Controller
                 ]);
             }
             Auth::login($user);
+            $user_signature = [
+                    
+                'signature_1' => null,
+                'signature_2' => null,
+                'signature_3' => null,
+                'user_id'=>auth()->id()
+    
+            ];
+    
+            $signature_model = new Signature($user_signature);
+            $signature_model->save();
             return redirect('/dashboard');    
 
         }catch(Exeption $e){

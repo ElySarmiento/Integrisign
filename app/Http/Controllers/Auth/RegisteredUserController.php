@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Signature;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -44,7 +45,7 @@ class RegisteredUserController extends Controller
             'password' => $request->password,
         ]);
 
-    
+        
 
         $user->update([
             'password' => Hash::make($request->password)
@@ -53,6 +54,18 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        $user_signature = [
+            
+            'signature_1' => null,
+            'signature_2' => null,
+            'signature_3' => null,
+            'user_id'=>auth()->id()
+
+        ];
+
+        $signature_model = new Signature($user_signature);
+        $signature_model->save();
 
         return redirect(RouteServiceProvider::HOME);
     }
