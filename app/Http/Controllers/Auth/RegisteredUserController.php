@@ -55,18 +55,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        $user_signature = [
-            
-            'signature_1' => null,
-            'signature_2' => null,
-            'signature_3' => null,
-            'user_id'=>auth()->id()
-
-        ];
-
-        $signature_model = new Signature($user_signature);
-        $signature_model->save();
-
         return redirect(RouteServiceProvider::HOME);
+
     }
 }

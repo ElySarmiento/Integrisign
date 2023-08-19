@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Redirect;
 
 
 
@@ -38,7 +39,9 @@ class ProviderController extends Controller
                 if(User::where('provider_id',$SocialUser->getId())->exists()){
                     
                     Auth::login($user);
-                    return redirect('/dashboard'); 
+                    //return redirect('/dashboard'); 
+                    return view('dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()]);
+
                 }
                 else{
                     return redirect('/login')->withErrors(['email'=>'This email uses different method to login.']);              
@@ -64,8 +67,7 @@ class ProviderController extends Controller
                     
                 ]);
 
-                
-
+        
                 $user->sendEmailVerificationNotification();
               
 
@@ -74,18 +76,10 @@ class ProviderController extends Controller
                 ]);
             }
             Auth::login($user);
-            $user_signature = [
-                    
-                'signature_1' => null,
-                'signature_2' => null,
-                'signature_3' => null,
-                'user_id'=>auth()->id()
-    
-            ];
-    
-            $signature_model = new Signature($user_signature);
-            $signature_model->save();
-            return redirect('/dashboard');    
+           
+            return redirect('/dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()]);
+            
+            
 
         }catch(Exeption $e){
             return redirect('/login');

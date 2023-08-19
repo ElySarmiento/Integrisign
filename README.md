@@ -64,3 +64,10 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+## To DO's
+- validation ng signature bago ma punta sa controller at maupload sa database
+- pag naupload kealngna makita yung picture dun sa container 
+- pag nag lolog in ng mano mano di alm kung nakapg upload na ba si user ng signature nya o hindi pa
