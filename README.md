@@ -68,6 +68,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 ## To DO's
-- validation ng signature bago ma punta sa controller at maupload sa database
-- pag naupload kealngna makita yung picture dun sa container 
+
+- baguhin yung front-end design ng landing page 
+- baguhin yung front-end design ng registration page
+- baguhin yung front-end design ng login page
+- gumwa ng main dashboard for testing signature (with history of test signature)
+- magsesend ng email kay user na nakapg insert na sya ng signature nya 
+
+## DONE
 - pag nag lolog in ng mano mano di alm kung nakapg upload na ba si user ng signature nya o hindi pa
+- validation ng signature bago ma punta sa controller at maupload sa database

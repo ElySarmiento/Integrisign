@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Validator;
 use App\models\Signature;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -11,6 +12,17 @@ class SignatureController extends Controller
     //
 
     public function upload_signature(Request $request){
+
+
+        $validator = Validator::make($request->all(), [
+            'signature_1' => 'required|image|mimes:jpeg,png,jpg',
+            'signature_2' => 'required|image|mimes:jpeg,png,jpg',
+            'signature_3' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $signature_1 = $request->file('signature_1');
         $signature_2 = $request->file('signature_2');
