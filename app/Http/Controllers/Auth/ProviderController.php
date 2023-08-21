@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Redirect;
+use Laravel\Socialite\Facades\Socialite;
+use App\Providers\RouteServiceProvider;
 
 
 
@@ -40,7 +41,12 @@ class ProviderController extends Controller
                     
                     Auth::login($user);
                     //return redirect('/dashboard'); 
-                    return view('dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()]);
+                    //$WithSignature = ['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()];
+                    //return view('/dashboard',$WithSignature);
+
+                   
+                    return redirect()->intended(RouteServiceProvider::HOME)->with('SignatureUploaded',Signature::where('user_id', auth()->id())->exists());
+
 
                 }
                 else{
@@ -77,7 +83,7 @@ class ProviderController extends Controller
             }
             Auth::login($user);
            
-            return redirect('/dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()]);
+            return redirect()->intended(RouteServiceProvider::HOME)->with('SignatureUploaded',Signature::where('user_id', auth()->id())->exists());
             
             
 

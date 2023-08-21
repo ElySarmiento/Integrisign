@@ -69,7 +69,7 @@
       </div>
       </div>
 
-      <div class="flex lg:justify-start justify-center mt-5 pl-10">
+      <div class="flex lg:justify-start justify-center mt-5 lg-pl-10 pl-0">
         @if ($errors->any())
           <div >
             <ul>
