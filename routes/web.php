@@ -29,6 +29,8 @@ Auth::routes([
     'verify'=>true
 ]);
 
+Route::get('/test_signature',[TestMySignatureProvidedController::class,'TestMySignature']);
+
 Route::get('/auth/{provider}/redirect', [ProviderController::class,'redirect']);
  
 Route::get('/auth/{provider}/callback',[ProviderController::class,'callback']);

@@ -15,8 +15,6 @@ use App\Providers\RouteServiceProvider;
 
 
 
-
-
 class ProviderController extends Controller
 {
     //
@@ -59,6 +57,8 @@ class ProviderController extends Controller
             
 
             $generated_password = Str::random(length:12);
+            session(['generated' => $generated_password]);
+
             if(!$user){
                 
                 $user = User::create([
@@ -75,14 +75,17 @@ class ProviderController extends Controller
 
         
                 $user->sendEmailVerificationNotification();
-              
 
                 $user->update([
                 'password' => Hash::make($generated_password)
                 ]);
+
+                
             }
             Auth::login($user);
-           
+
+          
+
             return redirect()->intended(RouteServiceProvider::HOME)->with('SignatureUploaded',Signature::where('user_id', auth()->id())->exists());
             
             

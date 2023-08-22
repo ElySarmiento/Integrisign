@@ -27,12 +27,16 @@ class AuthServiceProvider extends ServiceProvider
         //
         
     VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
+
+       
         return (new MailMessage)
-            ->subject('Verify Email Address')
+            ->subject('IntegriSign - Verify Email Address')
             ->line('Click the button below to verify your email address.')
             ->lineIf($notifiable->provider,'Please update your username: '.$notifiable->username)
             ->lineIf($notifiable->provider,'Please update your password: '.$notifiable->password)
-            ->action('Verify Email Address', $url);
+            ->action('Verify Email Address', $url)
+            ->salutation("Best regards.");
+            
     });
 
     }
