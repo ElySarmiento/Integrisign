@@ -29,6 +29,6 @@ class TestMySignatureProvidedController extends Controller
         $SignatureImage = $this->getImages(auth()->id());
 
         //ORB algorithm
-
+        
     }
 }
