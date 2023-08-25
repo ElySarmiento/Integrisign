@@ -38,8 +38,7 @@ Route::get('/auth/{provider}/callback',[ProviderController::class,'callback']);
 Route::post('/upload-signature',[SignatureController::class,'upload_signature']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-       // return view('dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()]);
+    return view('dashboard',['SignatureUploaded' => Signature::where('user_id', auth()->id())->exists()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

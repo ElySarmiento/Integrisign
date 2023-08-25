@@ -26,7 +26,7 @@
                     <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 800x400px)</p>
                 </div>
                 <img id="imagePreview1" src="#" alt="Preview1" style="display: none;" class="rounded-lg w-64 h-64">
-                <input onchange="NumberOne(event)" id="signature_1" name="signature_1" type="file" accept="image/*" class="w-72 hidden"  /> 
+                <input onchange="NumberOne(event)" id="signature_1"  name="signature_1" type="file" accept="image/*" class="w-72 hidden"  /> 
             </label>
         </div>
  

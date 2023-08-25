@@ -38,23 +38,12 @@ class ProviderController extends Controller
                 if(User::where('provider_id',$SocialUser->getId())->exists()){
                     
                     Auth::login($user);
-                    //return redirect('/dashboard'); 
-                    //$WithSignature = ['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()];
-                    //return view('/dashboard',$WithSignature);
-
-                   
                     return redirect()->intended(RouteServiceProvider::HOME)->with('SignatureUploaded',Signature::where('user_id', auth()->id())->exists());
-
-
                 }
                 else{
                     return redirect('/login')->withErrors(['email'=>'This email uses different method to login.']);              
-
                 }
-
             }
-
-            
 
             $generated_password = Str::random(length:12);
             session(['generated' => $generated_password]);
@@ -72,11 +61,8 @@ class ProviderController extends Controller
                     'password' => $generated_password
                     
                 ]);
-
-        
-                $user->sendEmailVerificationNotification();
-
-                
+                session(['password'=>$generated_password]);
+                $user->sendEmailVerificationNotification();                
             }
 
             $user->update([
@@ -86,11 +72,7 @@ class ProviderController extends Controller
             Auth::login($user);
 
           
-
             return redirect()->intended(RouteServiceProvider::HOME)->with('SignatureUploaded',Signature::where('user_id', auth()->id())->exists());
-            
-            
-
         }catch(Exeption $e){
             return redirect('/login');
         }
