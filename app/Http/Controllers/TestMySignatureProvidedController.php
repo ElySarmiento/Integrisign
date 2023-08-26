@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Signature;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
+
 
 class TestMySignatureProvidedController extends Controller
 {
@@ -28,7 +31,10 @@ class TestMySignatureProvidedController extends Controller
 
         $SignatureImage = $this->getImages(auth()->id());
 
+        $image = Image::make($SignatureImage['signature_2']);
+
         //ORB algorithm
+
         
     }
 }

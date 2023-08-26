@@ -6,6 +6,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\Auth\ProviderController;
+use App\Http\Controllers\TestMySignatureProvidedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Auth::routes([
     'verify'=>true
 ]);
 
-Route::get('/test_signature',[TestMySignatureProvidedController::class,'TestMySignature']);
+Route::post('/test_signature',[TestMySignatureProvidedController::class,'TestMySignature']);
 
 Route::get('/auth/{provider}/redirect', [ProviderController::class,'redirect']);
  
