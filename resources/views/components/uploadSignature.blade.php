@@ -1,7 +1,5 @@
 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-    <div class="p-6 text-gray-900 dark:text-gray-100">
-      {{ __("Welcome to IntegriSign! Before we begin, please upload your signatures.") }}
-    </div>
+   
     <div class="p-6 text-gray-900 dark:text-gray-100">
         
       <form action="/upload-signature" method="POST" enctype="multipart/form-data">

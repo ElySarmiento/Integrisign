@@ -31,8 +31,6 @@ class TestMySignatureProvidedController extends Controller
 
         $SignatureImage = $this->getImages(auth()->id());
 
-
-
         if(isset($SignatureImage)){
 
             $test_signature_path =  'signatureImage/testSignature.png'; 
