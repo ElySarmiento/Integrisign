@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Result;
 use App\Models\Signature;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
+
 
 
 class TestMySignatureProvidedController extends Controller
@@ -45,8 +47,9 @@ class TestMySignatureProvidedController extends Controller
         if(isset($SignatureImage)){
 
             $test_signature_path =  'signatureImage/testSignature.png'; 
-            $test_signature = Image::make($request->file('testSignature'))->save($test_signature_path);
+            $test_signature = Image::make($request->file('signature'))->save($test_signature_path);
             $sum = 0;  
+            $test_results = array();
             for ($i=1; $i <= 3; $i++) {
                  
                 $currentPath =  "signatureImage/signature_$i.png";   
@@ -55,28 +58,32 @@ class TestMySignatureProvidedController extends Controller
                 $path = "python C:/xampp/htdocs/your-project-name/app/python/Orb.py {'$test_signature_path'} {'$currentPath'} 2>&1";
                 $output = shell_exec($path); 
                 $result = intval(trim($output));
-
+                array_push($test_results,$result);
                 echo 'test '. $i .": ".$result.' ';    
                 $sum = $sum + $result;
-               
+                
 
             }
                $average = $sum / 3; 
-               echo '  average result : '. $average; 
+               echo '  average result : '. $average;
+               
+               
+               $result_information = [
+                'test_image' => file_get_contents($request->file('signature')->getRealPath()),
+                'fileName' => $request->file('signature')->getClientOriginalName(),
+                'test1_result' => $test_results[0],
+                'test2_result' => $test_results[1],
+                'test3_result' => $test_results[2],
+                'overall_result' => (int)$average,
+                'user_id' => auth()->id()
+    
+                ];
+    
+                $result_model = new Result($result_information);
+                $result_model->save();
         }
 
-        //$path = "python C:/xampp/htdocs/your-project-name/app/python/Orb.py {'$savePath'} 2>&1";
-        //$output = shell_exec($path);
-        //echo $output;
 
-        // Generate the HTML img tag with the base64 encoded image data
-        //$imgTag = '<img src="data:image/jpeg;base64,' . $base64Image . '" alt="Image">';
 
-        // Output the HTML img tag
-        //echo $imgTag;
-    
-        //ORB algorithm
-
-        
     }
 }
