@@ -6,6 +6,7 @@ use App\Models\Signature;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 
 class TestMySignatureProvidedController extends Controller
@@ -27,7 +28,17 @@ class TestMySignatureProvidedController extends Controller
     }
 
 
+
     public function TestMySignature(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'signature' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
 
         $SignatureImage = $this->getImages(auth()->id());
 

@@ -1,6 +1,6 @@
 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-3">
   <div class="p-6 text-gray-900 dark:text-gray-100 font">
-   <p class="text-base lg:text-large xl:text-xl font-semibold">{{ __("Welcome to IntegriSign! Before we begin, please upload your signatures.") }}</p> 
+    <h1 class="mb-4 text-lg font-extrabold text-gray-900 dark:text-white md:text-xl lg:text-2xl">Welcome to <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">IntegriSign!</span> Before we begin, please upload your signatures.</h1>
   </div>
 
   <div class="flex md:flex-row flex-col justify-around">
@@ -19,9 +19,9 @@
         </p>
       </div>
       <div class="flex flex-col flex-item-center justify-center pr-10 hidden md:block">
-        <img src="signatureImage/signature_1.png" alt="example signature image"
+        <img src="signatureImage/example_signature.png" alt="example signature image"
         class="w-48 h-48 justify-self-center rounded-md">
-        <p class="px-10 py-3 italic text-gray-900 dark:text-gray-100 text-sm">{{ __("Example image ") }}</p>
+      <div class="flex justify-center"> <p class=" py-3 italic text-gray-900 dark:text-gray-100 text-sm justify-center">{{ __("Example image ") }}</p></div>  
       </div>
   </div>
 
