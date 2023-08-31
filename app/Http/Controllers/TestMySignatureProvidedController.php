@@ -58,16 +58,12 @@ class TestMySignatureProvidedController extends Controller
                 $path = "python C:/xampp/htdocs/your-project-name/app/python/Orb.py {'$test_signature_path'} {'$currentPath'} 2>&1";
                 $output = shell_exec($path); 
                 $result = intval(trim($output));
-                array_push($test_results,$result);
-                echo 'test '. $i .": ".$result.' ';    
+                array_push($test_results,$result);   
                 $sum = $sum + $result;
                 
 
             }
                $average = $sum / 3; 
-               echo '  average result : '. $average;
-               
-               
                $result_information = [
                 'test_image' => file_get_contents($request->file('signature')->getRealPath()),
                 'fileName' => $request->file('signature')->getClientOriginalName(),
@@ -81,6 +77,13 @@ class TestMySignatureProvidedController extends Controller
     
                 $result_model = new Result($result_information);
                 $result_model->save();
+                $container = 'get_result';
+
+
+                return  view('dashboard',[
+                    'SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),
+                    'container' => $container
+                ]);
         }
 
 
