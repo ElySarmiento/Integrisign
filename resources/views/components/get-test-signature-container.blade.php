@@ -2,7 +2,7 @@
 
 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-3 pb-5">
   <div class="p-6 text-gray-900 dark:text-gray-100 font">
-    <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Better Data</span> Scalable AI.</h1>
+    <h1 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">Lets verify your  <span class="text-blue-600 dark:text-blue-500">Signature</span></h1>
   </div>
 
   <div class="flex md:flex-row-reverse flex-col-reverse justify-around ">
@@ -46,7 +46,7 @@
       <form action="/test_signature" id="test_signature" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="flex lg:flex-row flex-col item-center justify-around mb-5 ">
-        <!--1st signature-->
+        <!--signature-->
           <div class="flex items-center justify-center">
             <label  for="signature" class=" flex flex-col items-center justify-center w-64  h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">             
                 <div  id="content1" class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -71,10 +71,6 @@
   </div>
 
 </div>
-
-
-
-
 
 
 

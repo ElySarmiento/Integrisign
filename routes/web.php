@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Result;
 use App\Models\Signature;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -36,11 +37,16 @@ Route::get('/auth/{provider}/redirect', [ProviderController::class,'redirect']);
  
 Route::get('/auth/{provider}/callback',[ProviderController::class,'callback']);
 
+
+
 Route::post('/upload-signature',[SignatureController::class,'upload_signature']);
 
 Route::get('/dashboard', function () {
 
-    return view('dashboard',['SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),'container' => 'get_image']);
+    return view('dashboard',
+                            ['SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),
+                             'container' => 'get_image',
+                             'result_history' => Result::where('user_id',auth()->id())->get()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

@@ -78,11 +78,18 @@ class TestMySignatureProvidedController extends Controller
                 $result_model = new Result($result_information);
                 $result_model->save();
                 $container = 'get_result';
-
+                $result_history = Result::where('user_id',auth()->id())->get();  
 
                 return  view('dashboard',[
                     'SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),
-                    'container' => $container
+                    'container' => $container,
+                    'test_image' => file_get_contents($request->file('signature')->getRealPath()),
+                    'fileName' => $request->file('signature')->getClientOriginalName(),
+                    'test1_result' => $test_results[0],
+                    'test2_result' => $test_results[1],
+                    'test3_result' => $test_results[2],
+                    'overall_result' => (int)$average,
+                    'result_history' => $result_history
                 ]);
         }
 
