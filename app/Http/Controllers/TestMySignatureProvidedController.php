@@ -41,8 +41,9 @@ class TestMySignatureProvidedController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
+    
         $SignatureImage = $this->getImages(auth()->id());
+
 
         if(isset($SignatureImage)){
 
@@ -50,7 +51,28 @@ class TestMySignatureProvidedController extends Controller
             $test_signature = Image::make($request->file('signature'))->save($test_signature_path);
             $sum = 0;  
             $test_results = array();
-            for ($i=1; $i <= 3; $i++) {
+
+            if(Result::where('test_image',file_get_contents($request->file('signature')->getRealPath()))->exists()){
+                      
+                $result = Result::where('test_image',file_get_contents($request->file('signature')->getRealPath()))->get();
+                //dagdagan ng loop pra maidentify kung yung image ay kay user
+                return view('dashboard',[
+                    'SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),
+                    'container' => 'get_result',
+                    'test_image' => base64_encode(file_get_contents($request->file('signature')->getRealPath())),
+                    'fileName' => $request->file('signature')->getClientOriginalName(),
+                    'test1_result' => $result->test1_result,
+                    'test2_result' => $result->test2_result,
+                    'test3_result' => $result->test3_result,
+                    'overall_result' => $result->overall_result,
+                    'result_history' => Result::where('user_id',auth()->id())->get()
+
+                ]);
+                
+            }
+            else{
+            
+             for ($i=1; $i <= 3; $i++) {
                  
                 $currentPath =  "signatureImage/signature_$i.png";   
                 Image::make($SignatureImage["signature_$i"])->save($currentPath);
@@ -62,7 +84,7 @@ class TestMySignatureProvidedController extends Controller
                 $sum = $sum + $result;
                 
 
-            }
+                }
                $average = $sum / 3; 
                $result_information = [
                 'test_image' => file_get_contents($request->file('signature')->getRealPath()),
@@ -78,12 +100,13 @@ class TestMySignatureProvidedController extends Controller
                 $result_model = new Result($result_information);
                 $result_model->save();
                 $container = 'get_result';
+                $result_history = [];
                 $result_history = Result::where('user_id',auth()->id())->get();  
 
                 return  view('dashboard',[
                     'SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),
                     'container' => $container,
-                    'test_image' => file_get_contents($request->file('signature')->getRealPath()),
+                    'test_image' => base64_encode(file_get_contents($request->file('signature')->getRealPath())),
                     'fileName' => $request->file('signature')->getClientOriginalName(),
                     'test1_result' => $test_results[0],
                     'test2_result' => $test_results[1],
@@ -91,6 +114,7 @@ class TestMySignatureProvidedController extends Controller
                     'overall_result' => (int)$average,
                     'result_history' => $result_history
                 ]);
+            }
         }
 
 

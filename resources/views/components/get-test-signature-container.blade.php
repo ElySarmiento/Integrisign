@@ -1,6 +1,7 @@
 
 
-<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-3 pb-5">
+<div  class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg pb-6 mb-6">
+
   <div class="p-6 text-gray-900 dark:text-gray-100 font">
     <h1 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 md:text-4xl lg:text-5xl dark:text-white">Lets verify your  <span class="text-blue-600 dark:text-blue-500">Signature</span></h1>
   </div>
@@ -20,14 +21,14 @@
           {{ __("Avoid uploading images with low resolution or excessive details.") }}
         </p>
 
-      <div class="flex flex-row">  
-        <div class="px-10 justify-around mt-5">
-          <x-primary-button type="submit" form="test_signature" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Verify Signature</x-primary-button>
+      <div class="flex flex-col-reverse md:flex-row ">  
+        <div class="pl-10 justify-around mt-5">
+          <x-primary-button id="myButton" type="submit" form="test_signature" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Verify Signature</x-primary-button>
         </div>
        
-        <div class="flex lg:justify-start justify-center mt-5 lg-pl-10 pl-0">
+        <div class="flex justify-start mt-5 px-9">
           @if ($errors->any())
-            <div class="pt-2">
+            <div class="pt-2 " id="error">
               <ul>
                   @foreach ($errors->all() as $error)
                       <li class="text-red-600 ">{{ $error }}</li>
@@ -39,8 +40,11 @@
       </div>  
     </div>
 
-      <div class="flex flex-col flex-item-center justify-center lg-pr-10  md:block">
-       
+      <div id="myDiv" class="flex flex-col flex-item-center justify-center lg-pr-10  md:block">
+        <div class="flex justify-center hidden"> 
+          <img src= 'signatureImage/loadings.svg' alt="loading image" class=" rounded-lg w-64 h-64" >
+          
+       </div> 
     <div class="px-6 text-gray-900 dark:text-gray-100">
         
       <form action="/test_signature" id="test_signature" method="POST" enctype="multipart/form-data">
@@ -56,7 +60,7 @@
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                     <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 5MB)</p>
                 </div>
-                <img id="imagePreview1" src="#" alt="Preview1" style="display: none;" class="rounded-lg w-64 h-64">
+                <img id="imagePreview1" src="" alt="Preview1" style="display: none;" class="rounded-lg w-64 h-64" loading='lazy'>
                 <input onchange="NumberOne(event)" id="signature"  name="signature" type="file" accept="image/*" class="w-72 hidden"  /> 
             </label>
         </div>
@@ -74,18 +78,21 @@
 
 
 
-
 <script type="text/javascript">
   function NumberOne(event) {
       const fileInput = event.target;
       const label = fileInput.parentElement;
       const imagePreview = label.querySelector('#imagePreview1');
       const contentDiv = label.querySelector('#content1'); // Select the first div
+      const error = document.getElementById("error");
+      
       
       const reader = new FileReader();
       reader.onload = function(e) {
+
           imagePreview.src = e.target.result;
           imagePreview.style.display = 'block';
+          
           
           // Remove the content div from the label
           if (contentDiv) {
@@ -93,6 +100,26 @@
           }
       };
       reader.readAsDataURL(fileInput.files[0]);
+
+      error.style.display = 'none';
       
   }
+        const button = document.getElementById("myButton");
+        const div = document.getElementById("myDiv");
+        const first = div.querySelector(':nth-child(1)');
+        const second = div.querySelector(':nth-child(2)');
+        
+        //const loadingGif = 'C:/xampp/htdocs/your-project-name/public/signatureImage/loading.gif'
+        //const loadingDiv = second.querySelector(":nth-child(1)")
+
+        button.addEventListener("click", function() {
+            // This function will be executed when the button is clicked
+            first.style.display = 'flex';
+            second.style.display = 'none';
+         
+
+            // Change the content of the div
+            
+        });
+
 </script>

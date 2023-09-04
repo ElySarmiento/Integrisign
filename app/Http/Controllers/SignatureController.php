@@ -43,7 +43,8 @@ class SignatureController extends Controller
         
 
         return view('dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()
-                    ,'container' => 'get_image']);
+                    ,'container' => 'get_image'
+                    ,'result_history' => []]);
        
     }
 }

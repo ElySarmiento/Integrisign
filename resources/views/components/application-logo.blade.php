@@ -1,6 +1,6 @@
 
 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="70.000000pt" height="70.000000pt" viewBox="120 0 400.000000 400.000000"
+ width="70.000000pt" height="70.000000pt" viewBox="50 0 400.000000 400.000000"
  preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)"
