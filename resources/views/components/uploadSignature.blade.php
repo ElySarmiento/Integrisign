@@ -21,7 +21,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 5MB)</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 2MB)</p>
                 </div>
                 <img id="imagePreview1" src="#" alt="Preview1" style="display: none;" class="rounded-lg w-64 h-64">
                 <input onchange="NumberOne(event)" id="signature_1"  name="signature_1" type="file" accept="image/*" class="w-72 hidden"  /> 
@@ -44,7 +44,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 5MB)</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 2MB)</p>
                 </div>
                 <img id="imagePreview2" src="#" alt="Preview2" style="display: none;" class="rounded-lg w-64 h-64">
                 <input onchange="NumberTwo(event)" id="signature_2" name="signature_2" type="file" accept="image/*" class="w-72 hidden"  /> 
@@ -65,7 +65,7 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
                     </svg>
                     <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 5MB)</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">JPEG, PNG or JPG  (MAX. 2MB)</p>
                 </div>
                 <img id="imagePreview3" src="#" alt="Preview3" style="display: none;" class="rounded-lg w-64 h-64">
                 <input onchange="NumberThree(event)" id="signature_3" name="signature_3" type="file" accept="image/*" class="w-72 hidden"  /> 

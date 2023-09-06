@@ -46,7 +46,7 @@ image1_path = sys.argv[1]
 image2_path = sys.argv[2]
 image_1 = str(image1_path[2:-2])
 image_2 = str(image2_path[2:-2])
-ground_truth_distance = 40  # Set the ground truth distance her
+ground_truth_distance = 60  # Set the ground truth distance her
 
 detect_and_match_features(image_1, image_2, ground_truth_distance)
 

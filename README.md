@@ -67,14 +67,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 
-## To DO's
+## note 
 
-- baguhin yung front-end design ng landing page 
-- baguhin yung front-end design ng registration page
-- baguhin yung front-end design ng login page
-- gumwa ng main dashboard for testing signature (with history of test signature)
-- magsesend ng email kay user na nakapg insert na sya ng signature nya 
+Database: kung kung mag iiba ng data base
+          dapt baguhin yung data type ng mga signature into  mediumblob
 
-## DONE
-- pag nag lolog in ng mano mano di alm kung nakapg upload na ba si user ng signature nya o hindi pa
-- validation ng signature bago ma punta sa controller at maupload sa database
+          then adjust the max allowed packet to 16mb

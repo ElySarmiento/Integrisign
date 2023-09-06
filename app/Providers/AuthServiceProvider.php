@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
     VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
         
         $password = session('password');
-        //session()->forget('password');
+        session()->forget('password');
        
         return (new MailMessage)
             ->subject('IntegriSign - Verify Email Address')

@@ -29,12 +29,10 @@ class TestMySignatureProvidedController extends Controller
 
     }
 
-
-
     public function TestMySignature(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'signature' => 'required|image|mimes:jpeg,png,jpg',
+            'signature' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
     
         if ($validator->fails()) {
@@ -51,26 +49,30 @@ class TestMySignatureProvidedController extends Controller
             $test_signature = Image::make($request->file('signature'))->save($test_signature_path);
             $sum = 0;  
             $test_results = array();
+            $testImageContents = file_get_contents($request->file('signature')->getRealPath());      
 
-            if(Result::where('test_image',file_get_contents($request->file('signature')->getRealPath()))->exists()){
-                      
-                $result = Result::where('test_image',file_get_contents($request->file('signature')->getRealPath()))->get();
-                //dagdagan ng loop pra maidentify kung yung image ay kay user
-                return view('dashboard',[
-                    'SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),
-                    'container' => 'get_result',
-                    'test_image' => base64_encode(file_get_contents($request->file('signature')->getRealPath())),
-                    'fileName' => $request->file('signature')->getClientOriginalName(),
-                    'test1_result' => $result->test1_result,
-                    'test2_result' => $result->test2_result,
-                    'test3_result' => $result->test3_result,
-                    'overall_result' => $result->overall_result,
-                    'result_history' => Result::where('user_id',auth()->id())->get()
-
-                ]);
+            if(Result::where('test_image',$testImageContents)->exists()){
+                $results = Result::where('test_image',$testImageContents)->get();
+                
+                foreach ($results as $result) {
+                    if ($result->user_id == auth()->id()) {
+                        return view('dashboard', [
+                            'SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),
+                            'container' => 'get_result',
+                            'test_image' => base64_encode($testImageContents),
+                            'fileName' => $request->file('signature')->getClientOriginalName(),
+                            'test1_result' => $result->test1_result,
+                            'test2_result' => $result->test2_result,
+                            'test3_result' => $result->test3_result,
+                            'overall_result' => $result->overall_result,
+                            'result_history' => Result::where('user_id', auth()->id())->get()
+                        ]);
+                    }
+                }
+                
                 
             }
-            else{
+          
             
              for ($i=1; $i <= 3; $i++) {
                  
@@ -114,7 +116,7 @@ class TestMySignatureProvidedController extends Controller
                     'overall_result' => (int)$average,
                     'result_history' => $result_history
                 ]);
-            }
+            
         }
 
 

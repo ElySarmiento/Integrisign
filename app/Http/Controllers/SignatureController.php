@@ -15,36 +15,42 @@ class SignatureController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'signature_1' => 'required|image|mimes:jpeg,png,jpg',
-            'signature_2' => 'required|image|mimes:jpeg,png,jpg',
-            'signature_3' => 'required|image|mimes:jpeg,png,jpg',
+            'signature_1' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'signature_2' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'signature_3' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $signature_1 = $request->file('signature_1');
-        $signature_2 = $request->file('signature_2');
-        $signature_3 = $request->file('signature_3');
+        if(Signature::where('user_id',auth()->id())->exists()){
 
-        $user_signature = [
+            return view('dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()
+            ,'container' => 'get_image'
+            ,'result_history' => []]);
+
+        }
+        else{
+            $signature_1 = $request->file('signature_1');
+            $signature_2 = $request->file('signature_2');
+            $signature_3 = $request->file('signature_3');
+
+            $user_signature = [
                     
             'signature_1' => file_get_contents($signature_1->getRealPath()),
             'signature_2' => file_get_contents($signature_2->getRealPath()),
             'signature_3' => file_get_contents($signature_3->getRealPath()),
             'user_id'=>auth()->id()
-
-        ];
+            ];
          
-        $signature_model = new Signature($user_signature);
-        $signature_model->save();   
+            $signature_model = new Signature($user_signature);
+            $signature_model->save();   
 
-        
-
-        return view('dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()
+            return view('dashboard',['SignatureUploaded'=>Signature::where('user_id', auth()->id())->exists()
                     ,'container' => 'get_image'
                     ,'result_history' => []]);
+        }            
        
     }
 }

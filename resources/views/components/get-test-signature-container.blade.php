@@ -12,7 +12,7 @@
           {{ __("Accepted file formats: JPEG, PNG, JPG") }}
         </p>
         <p class="px-10 py-3 text-gray-900 dark:text-gray-100">
-          {{ __("Maximum file size: 5MB.") }}
+          {{ __("Maximum file size: 2MB.") }}
         </p>
         <p class="px-10 py-3 text-gray-900 dark:text-gray-100">
           {{ __("Ensure your signature image is clear and legible.") }}

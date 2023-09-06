@@ -11,7 +11,7 @@
     
 @if($container == 'get_result')
   @include('components.test-result')
-  
+  @include('components.test-result-history')
 @endif
 
   
