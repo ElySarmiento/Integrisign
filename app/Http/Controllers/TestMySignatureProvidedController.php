@@ -65,7 +65,7 @@ class TestMySignatureProvidedController extends Controller
                             'test2_result' => $result->test2_result,
                             'test3_result' => $result->test3_result,
                             'overall_result' => $result->overall_result,
-                            'result_history' => Result::where('user_id', auth()->id())->get()
+                            'result_history' => Result::where('user_id',auth()->id())->orderBy('created_at', 'desc')->get()
                         ]);
                     }
                 }
@@ -95,7 +95,8 @@ class TestMySignatureProvidedController extends Controller
                 'test2_result' => $test_results[1],
                 'test3_result' => $test_results[2],
                 'overall_result' => (int)$average,
-                'user_id' => auth()->id()
+                'user_id' => auth()->id(),
+                'date' => date("d M Y   g:i a", time())
     
                 ];
     
@@ -103,7 +104,7 @@ class TestMySignatureProvidedController extends Controller
                 $result_model->save();
                 $container = 'get_result';
                 $result_history = [];
-                $result_history = Result::where('user_id',auth()->id())->get();  
+                $result_history = Result::where('user_id',auth()->id())->orderBy('created_at', 'desc')->get();  
 
                 return  view('dashboard',[
                     'SignatureUploaded' => Signature::where('user_id', auth()->id())->exists(),

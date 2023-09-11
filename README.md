@@ -69,7 +69,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## note 
 
-Database: kung kung mag iiba ng data base
+Database:  kung mag iiba ng data base
           dapt baguhin yung data type ng mga signature into  mediumblob
 
           then adjust the max allowed packet to 16mb
+
+## Do's:
+        - modify the result and history result container
+        - modify the landing/welcome page, login and register page
+        - create footer container
+        - create terms and condition and data privacy container

@@ -17,5 +17,6 @@ class Result extends Model
         'test3_result',
         'overall_result',
         'user_id',
+        'date'
     ];
 }

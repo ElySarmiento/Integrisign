@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('test3_result')->nullable();
             $table->string('overall_result')->nullable();
             $table->foreignId('user_id')->nullable();
+            $table->string('date');
             $table->timestamps();
         });
     }
